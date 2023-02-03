@@ -48,7 +48,7 @@ export default {
     return {
       clipped: false,
       drawer: false,
-      fixed: false,
+      title: 'Learning Nuxt',
       items: [
         {
           icon: 'mdi-home',
@@ -61,10 +61,6 @@ export default {
           to: '/weather-app',
         },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Learning Nuxt',
     }
   },
 }
