@@ -11,6 +11,9 @@
               <h4>Temperature</h4>
               <h1 class="display-1">{{ weather.name }}</h1>
               <img :src="icon" alt="icon-weather" />
+              <p>
+                <span class="display-1">{{ temp() }} &deg;C</span>
+              </p>
             </v-flex>
           </v-layout>
         </v-card-text>
@@ -52,6 +55,9 @@ export default {
           `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=bede080e9ccd38476d8ea25dfa9f91cc`
         )
         .then((res) => (this.weather = res))
+    },
+    temp(){
+      return Math.round(this.weather.main.temp - 273) ?? ''
     }
   }
 }
