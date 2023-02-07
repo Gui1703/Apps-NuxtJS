@@ -26,7 +26,9 @@
     </v-navigation-drawer>
     <v-app-bar color="indigo" dark :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title>
+        <n-link class="link" to="/">{{ title }}</n-link>
+      </v-toolbar-title>
       <v-spacer />
       <v-btn plain>
         <n-link class="link" to="/weather-app">Weather App</n-link>

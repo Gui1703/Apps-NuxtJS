@@ -57,10 +57,18 @@
 <script>
 export default {
   name: 'WeatherApp',
+  asyncData({ params, $axios }) {
+    return $axios
+      .$get(
+        `https://api.openweathermap.org/data/2.5/weather?q=London&APPID=bede080e9ccd38476d8ea25dfa9f91cc`
+      )
+      .then((res) => {
+        return { weather: res }
+      })
+  },
   data() {
     return {
-      city: 'London',
-      weather: {}
+      city: 'London'
     }
   },
   computed: {
@@ -69,9 +77,6 @@ export default {
         ? `https://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`
         : ''
     }
-  },
-  created() {
-    this.getWeatherInfo()
   },
   methods: {
     getWeatherInfo() {
