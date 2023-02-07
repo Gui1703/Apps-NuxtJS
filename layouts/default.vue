@@ -34,7 +34,7 @@
     </v-app-bar>
 
     <v-main>
-        <Nuxt />
+      <Nuxt />
     </v-main>
   </v-app>
 </template>
@@ -51,16 +51,16 @@ export default {
         {
           icon: 'mdi-home',
           title: 'Home',
-          to: '/',
+          to: '/'
         },
         {
           icon: 'mdi-cloud',
           title: 'Weather App',
-          to: '/weather-app',
-        },
-      ],
+          to: '/weather-app'
+        }
+      ]
     }
-  },
+  }
 }
 </script>
 
