@@ -7,12 +7,37 @@
       <v-card color="blue-grey darken-2">
         <v-card-text class="white--text">
           <v-layout v-if="weather.weather" justify-center>
-            <v-flex class="text-center">
+            <v-flex xs4 class="text-center">
               <h4>Temperature</h4>
               <h1 class="display-1">{{ weather.name }}</h1>
               <img :src="icon" alt="icon-weather" />
               <p>
                 <span class="display-1">{{ temp() }} &deg;C</span>
+                <span class="caption ml-4">
+                  {{ weather.weather[0].description }}
+                </span>
+              </p>
+            </v-flex>
+            <v-flex xs4 class="text-center">
+              <h4>Temperature</h4>
+              <h1 class="display-1">{{ weather.name }}</h1>
+              <img :src="icon" alt="icon-weather" />
+              <p>
+                <span class="display-1">{{ temp() }} &deg;C</span>
+                <span class="caption ml-4">
+                  {{ weather.weather[0].description }}
+                </span>
+              </p>
+            </v-flex>
+            <v-flex xs4 class="text-center">
+              <h4>Temperature</h4>
+              <h1 class="display-1">{{ weather.name }}</h1>
+              <img :src="icon" alt="icon-weather" />
+              <p>
+                <span class="display-1">{{ temp() }} &deg;C</span>
+                <span class="caption ml-4">
+                  {{ weather.weather[0].description }}
+                </span>
               </p>
             </v-flex>
           </v-layout>
@@ -56,8 +81,10 @@ export default {
         )
         .then((res) => (this.weather = res))
     },
-    temp(){
-      return Math.round(this.weather.main.temp - 273) ?? ''
+    temp() {
+      return this.weather.weather
+        ? Math.round(this.weather.main.temp - 273)
+        : ''
     }
   }
 }
