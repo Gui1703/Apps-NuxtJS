@@ -1,12 +1,11 @@
 <template>
   <v-container>
-    <!-- <v-layout> -->
     <h1 class="display-1 text-center">Weather App</h1>
 
     <v-flex xs12>
       <v-card color="blue-grey darken-2">
         <v-card-text class="white--text">
-          <v-layout v-if="weather.weather" justify-center>
+          <v-layout justify-center>
             <v-flex xs4 class="text-center">
               <h4>Temperature</h4>
               <h1 class="display-1">{{ weather.name }}</h1>
@@ -54,7 +53,6 @@
         <v-text-field v-model="city" solo label="Enter City Name" />
       </v-form>
     </v-flex>
-    <!-- </v-layout> -->
   </v-container>
 </template>
 
@@ -91,9 +89,7 @@ export default {
         .then((res) => (this.weather = res))
     },
     temp() {
-      return this.weather.weather
-        ? Math.round(this.weather.main.temp - 273)
-        : ''
+      return Math.round(this.weather.main.temp - 273)
     }
   }
 }
