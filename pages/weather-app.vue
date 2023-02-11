@@ -9,7 +9,7 @@
             <v-flex xs4 class="text-center">
               <h4>Temperature</h4>
               <h1 class="display-1">{{ weather.name }}</h1>
-              <img :src="icon" alt="icon-weather" />
+              <img :src="icon" alt="icon-weather"/>
               <p>
                 <span class="display-1">{{ temp() }} &deg;C</span>
                 <span class="caption ml-4">
@@ -50,7 +50,7 @@
 
     <v-flex xs12 class="mt-4">
       <v-form @submit.prevent="getWeatherInfo">
-        <v-text-field v-model="city" solo label="Enter City Name" />
+        <v-text-field v-model="city" solo label="Enter City Name"/>
       </v-form>
     </v-flex>
   </v-container>
@@ -59,21 +59,24 @@
 <script>
 export default {
   name: 'WeatherApp',
-  asyncData({ params, $axios }) {
+  asyncData({params, $axios}) {
     return $axios
       .$get(
         `https://api.openweathermap.org/data/2.5/weather?q=London&APPID=${process.env.weatherAppId}`
       )
       .then((res) => {
-        return { weather: res }
+        return {weather: res}
       })
   },
-  data() {
-    return {
-      city: 'London'
-    }
-  },
   computed: {
+    city: {
+      get() {
+        return this.$store.state.weather.city
+      },
+      set(value) {
+        this.$store.commit('weather/setCity', value)
+      }
+    },
     icon() {
       return this.weather.weather
         ? `https://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`
