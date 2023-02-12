@@ -88,11 +88,7 @@ export default {
   },
   methods: {
     getWeatherInfo() {
-      this.$axios
-        .$get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${this.city}&APPID=${process.env.weatherAppId}`
-        )
-        .then((res) => (this.weather = res))
+      this.$store.dispatch('weather/getWeatherInfo')
     },
     temp() {
       return Math.round(this.weather.main.temp - 273)

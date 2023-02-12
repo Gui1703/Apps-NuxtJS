@@ -11,3 +11,13 @@ export const mutations = {
     state.weather = payload
   }
 }
+
+export const actions = {
+  getWeatherInfo(context, payload) {
+    this.$axios
+      .$get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${context.state.city}&APPID=${process.env.weatherAppId}`
+      )
+      .then((res) => context.commit('setWeather', res))
+  },
+}
