@@ -1,0 +1,56 @@
+<script>
+export default {
+  name: 'QuestionsTable',
+  created() {
+    this.fetchQuestions()
+  },
+  methods: {
+    fetchQuestions() {
+      this.$axios.get('https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions.json')
+        .then(res => console.log(res))
+    },
+  }
+}
+</script>
+
+<template>
+  <v-container>
+    <v-layout>
+      <v-flex>
+        <v-card>
+          <v-card-title>
+            <h1 class="display-1">All Questions</h1>
+            <v-spacer/>
+            <nuxt-link to="/admin/questions/create">
+              <v-btn small dark color="grey darken-2">Create Questions</v-btn>
+            </nuxt-link>
+          </v-card-title>
+
+          <v-card-text>
+            <v-data-table
+              :headers="headers"
+              :items="questions"
+              class="elevation-1"
+            >
+              <template #items="props">
+                <td class="text-xs-left">{{ props.item.question }}</td>
+                <td class="text-xs-left">{{ props.item.option1 }}</td>
+                <td class="text-xs-left">{{ props.item.option2 }}</td>
+                <td class="text-xs-left">{{ props.item.option3 }}</td>
+                <td class="text-xs-left">{{ props.item.option4 }}</td>
+                <td class="text-xs-center">
+                  <v-icon small @click="destroy(props.item.id)">delete</v-icon>
+                  <nuxt-link :to="`/admin/questions/${props.item.id}`">
+                    <v-icon small color="orange">edit</v-icon>
+                  </nuxt-link>
+                </td>
+              </template>
+            </v-data-table>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<style scoped></style>

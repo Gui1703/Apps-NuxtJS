@@ -39,7 +39,10 @@ export default {
           <v-card-title>
             <h1 class="display-1">Add Question</h1>
             <v-spacer/>
-            <v-btn small dark color="grey darken-2">All Questions</v-btn>
+
+            <nuxt-link to="/admin/questions">
+              <v-btn small dark color="grey darken-2">All Questions</v-btn>
+            </nuxt-link>
           </v-card-title>
 
           <v-card-text>
