@@ -1,5 +1,23 @@
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      quiz: {
+        question: '',
+        option1: '',
+        option2: '',
+        option3: '',
+        option4: ''
+      },
+      correct: ''
+    }
+  },
+  methods: {
+    store() {
+
+    }
+  }
+}
 </script>
 
 <template>
@@ -14,28 +32,28 @@ export default {}
           </v-card-title>
 
           <v-card-text>
-            <form>
-              <v-text-field label="Question" solo/>
-              <v-text-field label="Option 1" solo/>
-              <v-text-field label="Option 2" solo/>
-              <v-text-field label="Option 3" solo/>
-              <v-text-field label="Option 4" solo/>
+            <form @submit.prevent="store">
+              <v-text-field v-model="quiz.question" label="Question" solo/>
+              <v-text-field v-model="quiz.option1" label="Option 1" solo/>
+              <v-text-field v-model="quiz.option2" label="Option 2" solo/>
+              <v-text-field v-model="quiz.option3" label="Option 3" solo/>
+              <v-text-field v-model="quiz.option4" label="Option 4" solo/>
+
+              <v-flex>
+                <p>Choose Correct Answer</p>
+                <v-radio-group v-model="correct" row>
+                  <v-radio label="Option 1"/>
+                  <v-spacer/>
+                  <v-radio label="Option 2"/>
+                  <v-spacer/>
+                  <v-radio label="Option 3"/>
+                  <v-spacer/>
+                  <v-radio label="Option 4"/>
+                </v-radio-group>
+
+                <v-btn class="indigo" block dark type="submit">Add</v-btn>
+              </v-flex>
             </form>
-
-            <v-flex>
-              <p>Choose Correct Answer</p>
-              <v-radio-group row>
-                <v-radio label="Option 1"/>
-                <v-spacer/>
-                <v-radio label="Option 2"/>
-                <v-spacer/>
-                <v-radio label="Option 3"/>
-                <v-spacer/>
-                <v-radio label="Option 4"/>
-              </v-radio-group>
-
-              <v-btn class="indigo" block dark type="submit">Add</v-btn>
-            </v-flex>
           </v-card-text>
         </v-card>
       </v-flex>
