@@ -24,18 +24,21 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar color="indigo" dark :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
       <v-toolbar-title>
         <n-link class="link" to="/">{{ title }}</n-link>
       </v-toolbar-title>
-      <v-spacer />
+      <v-spacer/>
       <v-btn plain>
         <n-link class="link" to="/weather-app">Weather App</n-link>
+      </v-btn>
+      <v-btn plain>
+        <n-link class="link" to="/quiz">Quiz App</n-link>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <Nuxt />
+      <Nuxt/>
     </v-main>
   </v-app>
 </template>
@@ -58,6 +61,11 @@ export default {
           icon: 'mdi-cloud',
           title: 'Weather App',
           to: '/weather-app'
+        },
+        {
+          icon: 'mdi-help-box-multiple',
+          title: 'Quiz App',
+          to: '/quiz'
         }
       ]
     }
