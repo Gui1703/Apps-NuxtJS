@@ -25,8 +25,6 @@ export default {
         answer: this.correct
       }).then((result) => {
         console.log(result)
-      }).catch(err => {
-        console.log(err.response.data)
       })
     }
   }
@@ -54,14 +52,15 @@ export default {
 
               <v-flex>
                 <p>Choose Correct Answer</p>
+
                 <v-radio-group v-model="correct" :mandatory="false" row>
-                  <v-radio label="Option 1" :value="quiz.option1"/>
+                  <v-radio label="Option 1" value="option1" @click="correct = quiz.option1"/>
                   <v-spacer/>
-                  <v-radio label="Option 2" :value="quiz.option2"/>
+                  <v-radio label="Option 2" value="option2" @click="correct = quiz.option2"/>
                   <v-spacer/>
-                  <v-radio label="Option 3" :value="quiz.option3"/>
+                  <v-radio label="Option 3" value="option3" @click="correct = quiz.option3"/>
                   <v-spacer/>
-                  <v-radio label="Option 4" :value="quiz.option4"/>
+                  <v-radio label="Option 4" value="option4" @click="correct = quiz.option4"/>
                 </v-radio-group>
 
                 <v-btn class="indigo" block dark type="submit">Add</v-btn>
