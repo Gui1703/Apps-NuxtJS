@@ -14,7 +14,20 @@ export default {
   },
   methods: {
     store() {
-
+      this.$axios.post('https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions.json', this.quiz)
+        .then(res => {
+          this.storeAnswer(res.data.name)
+        })
+    },
+    storeAnswer(id) {
+      this.$axios.post('https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json', {
+        question_id: id,
+        answer: this.correct
+      }).then((result) => {
+        console.log(result)
+      }).catch(err => {
+        console.log(err.response.data)
+      })
     }
   }
 }
@@ -41,14 +54,14 @@ export default {
 
               <v-flex>
                 <p>Choose Correct Answer</p>
-                <v-radio-group v-model="correct" row>
-                  <v-radio label="Option 1"/>
+                <v-radio-group v-model="correct" :mandatory="false" row>
+                  <v-radio label="Option 1" :value="quiz.option1"/>
                   <v-spacer/>
-                  <v-radio label="Option 2"/>
+                  <v-radio label="Option 2" :value="quiz.option2"/>
                   <v-spacer/>
-                  <v-radio label="Option 3"/>
+                  <v-radio label="Option 3" :value="quiz.option3"/>
                   <v-spacer/>
-                  <v-radio label="Option 4"/>
+                  <v-radio label="Option 4" :value="quiz.option4"/>
                 </v-radio-group>
 
                 <v-btn class="indigo" block dark type="submit">Add</v-btn>
