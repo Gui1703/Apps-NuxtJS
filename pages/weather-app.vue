@@ -60,13 +60,7 @@
 export default {
   name: 'WeatherApp',
   fetch({store, $axios}) {
-    return $axios
-      .$get(
-        `https://api.openweathermap.org/data/2.5/weather?q=London&APPID=${process.env.weatherAppId}`
-      )
-      .then((res) => {
-        store.commit('weather/setWeather', res)
-      })
+    return store.dispatch('weather/getWeatherInfo')
   },
   computed: {
     weather() {
