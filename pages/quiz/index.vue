@@ -1,5 +1,17 @@
 <script>
-export default {}
+export default {
+
+  data() {
+    return {
+      choosen: ''
+    }
+  },
+  methods: {
+    handleAnswer() {
+      console.log(this.choosen)
+    }
+  }
+}
 </script>
 
 <template>
@@ -14,16 +26,20 @@ export default {}
 
         <v-card-text>
           <v-container>
-            <v-radio-group row>
+            <v-radio-group v-model="choosen" row>
               <v-radio label="Radio 1" color="green" value="option1"/>
               <v-spacer/>
-              <v-radio label="Radio 1" color="green" value="option1"/>
+              <v-radio label="Radio 2" color="green" value="option2"/>
               <v-spacer/>
-              <v-radio label="Radio 1" color="green" value="option1"/>
+              <v-radio label="Radio 3" color="green" value="option3"/>
               <v-spacer/>
-              <v-radio label="Radio 1" color="green" value="option1"/>
+              <v-radio label="Radio 4" color="green" value="option4"/>
             </v-radio-group>
           </v-container>
+
+          <v-layout>
+            <v-btn color="purple darken-2" dark small @click="handleAnswer">Submit</v-btn>
+          </v-layout>
         </v-card-text>
       </v-card>
     </v-flex>

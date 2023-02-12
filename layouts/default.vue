@@ -1,48 +1,3 @@
-<template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar color="indigo" dark :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
-      <v-toolbar-title>
-        <n-link class="link" to="/">{{ title }}</n-link>
-      </v-toolbar-title>
-      <v-spacer/>
-      <v-btn plain>
-        <n-link class="link" to="/weather-app">Weather App</n-link>
-      </v-btn>
-      <v-btn plain>
-        <n-link class="link" to="/quiz">Quiz App</n-link>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <Nuxt/>
-    </v-main>
-  </v-app>
-</template>
-
 <script>
 export default {
   name: 'DefaultLayout',
@@ -72,6 +27,53 @@ export default {
   }
 }
 </script>
+
+<template>
+  <v-app dark>
+    <v-navigation-drawer
+      v-model="drawer"
+      :clipped="clipped"
+      fixed
+      app
+    >
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :to="item.to"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar color="indigo" dark :clipped-left="clipped" fixed app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
+      <v-toolbar-title>
+        <nuxt-link class="link" to="/">{{ title }}</nuxt-link>
+      </v-toolbar-title>
+      <v-spacer/>
+      <v-btn plain>
+        <nuxt-link class="link" to="/weather-app">Weather App</nuxt-link>
+      </v-btn>
+      <v-btn plain>
+        <nuxt-link class="link" to="/quiz">Quiz App</nuxt-link>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <Nuxt/>
+    </v-main>
+  </v-app>
+</template>
+
 
 <style scoped>
 .link {
