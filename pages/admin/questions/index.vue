@@ -1,6 +1,19 @@
 <script>
 export default {
   name: 'QuestionsTable',
+  data() {
+    return {
+      headers: [
+        {text: 'Question', value: 'question'},
+        {text: 'Option 1', value: 'option1'},
+        {text: 'Option 2', value: 'option2'},
+        {text: 'Option 3', value: 'option3'},
+        {text: 'Option 4', value: 'option4'},
+        {text: 'Action', value: 'action'}
+      ],
+      questions: []
+    }
+  },
   created() {
     this.fetchQuestions()
   },
