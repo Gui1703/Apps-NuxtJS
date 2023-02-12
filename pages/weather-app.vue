@@ -59,16 +59,19 @@
 <script>
 export default {
   name: 'WeatherApp',
-  asyncData({params, $axios}) {
+  fetch({store, $axios}) {
     return $axios
       .$get(
         `https://api.openweathermap.org/data/2.5/weather?q=London&APPID=${process.env.weatherAppId}`
       )
       .then((res) => {
-        return {weather: res}
+        store.commit('weather/setWeather', res)
       })
   },
   computed: {
+    weather() {
+      return this.$store.state.weather.weather
+    },
     city: {
       get() {
         return this.$store.state.weather.city
