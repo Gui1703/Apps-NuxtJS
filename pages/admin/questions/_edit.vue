@@ -31,7 +31,7 @@ export default {
           `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions/${this.$route.params.edit}.json`,
           this.quiz
         )
-        .then((res) => this.$router.push('/admin/questions'))
+        .then((res) => this.updateAnswer())
     },
     getAnswer() {
       this.$axios
@@ -42,6 +42,16 @@ export default {
           this.correct = Object.values(res)[0].answer
           this.answer_id = Object.keys(res)[0]
         })
+    },
+    updateAnswer() {
+      this.$axios
+        .patch(
+          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers/${this.question_id}.json`,
+          { question_id: this.$route.params.edit, answer: this.correct },
+
+          this.quiz
+        )
+        .then((res) => this.$router.push('/admin/questions'))
     }
   }
 }
@@ -73,29 +83,13 @@ export default {
                 <p>Choose Correct Answer</p>
 
                 <v-radio-group v-model="correct" :mandatory="false" row>
-                  <v-radio
-                    label="Option 1"
-                    value="option1"
-                    @click="correct = quiz.option1"
-                  />
+                  <v-radio label="Option 1" :value="quiz.option1" />
                   <v-spacer />
-                  <v-radio
-                    label="Option 2"
-                    value="option2"
-                    @click="correct = quiz.option2"
-                  />
+                  <v-radio label="Option 2" :value="quiz.option2" />
                   <v-spacer />
-                  <v-radio
-                    label="Option 3"
-                    value="option3"
-                    @click="correct = quiz.option3"
-                  />
+                  <v-radio label="Option 3" :value="quiz.option3" />
                   <v-spacer />
-                  <v-radio
-                    label="Option 4"
-                    value="option4"
-                    @click="correct = quiz.option4"
-                  />
+                  <v-radio label="Option 4" :value="quiz.option4" />
                 </v-radio-group>
 
                 <v-btn class="indigo" block dark type="submit">Update</v-btn>
