@@ -25,6 +25,16 @@ export default {
         )
         .then((res) => (this.quiz = res.data[this.$route.params.edit]))
     },
+    getAnswer() {
+      this.$axios
+        .get(
+          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${this.$route.params.edit}"&endAt="${this.$route.params.edit}"`
+        )
+        .then((res) => {
+          this.correct = Object.values(res.data)[0].answer
+          this.answer_id = Object.keys(res.data)[0]
+        })
+    },
     update() {
       this.$axios
         .patch(
@@ -33,16 +43,7 @@ export default {
         )
         .then((res) => this.updateAnswer())
     },
-    getAnswer() {
-      this.$axios
-        .get(
-          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${this.$route.params.edit}"&endAt="${this.$route.params.edit}"`
-        )
-        .then((res) => {
-          this.correct = Object.values(res)[0].answer
-          this.answer_id = Object.keys(res)[0]
-        })
-    },
+
     updateAnswer() {
       this.$axios
         .patch(
@@ -83,13 +84,13 @@ export default {
                 <p>Choose Correct Answer</p>
 
                 <v-radio-group v-model="correct" :mandatory="false" row>
-                  <v-radio label="Option 1" :value="quiz.option1" />
+                  <v-radio v-model="quiz.option1" :label="quiz.option1" />
                   <v-spacer />
-                  <v-radio label="Option 2" :value="quiz.option2" />
+                  <v-radio v-model="quiz.option2" :label="quiz.option2" />
                   <v-spacer />
-                  <v-radio label="Option 3" :value="quiz.option3" />
+                  <v-radio v-model="quiz.option3" :label="quiz.option3" />
                   <v-spacer />
-                  <v-radio label="Option 4" :value="quiz.option4" />
+                  <v-radio v-model="quiz.option4" :label="quiz.option4" />
                 </v-radio-group>
 
                 <v-btn class="indigo" block dark type="submit">Update</v-btn>
