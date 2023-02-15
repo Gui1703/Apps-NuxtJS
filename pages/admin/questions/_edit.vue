@@ -9,12 +9,13 @@ export default {
         option3: '',
         option4: ''
       },
-      correct: ''
+      correct: '',
+      answer_id: ''
     }
   },
   created() {
-    console.log(this.$route.params.edit)
     this.get()
+    this.getAnswer()
   },
   methods: {
     get() {
@@ -31,6 +32,16 @@ export default {
           this.quiz
         )
         .then((res) => this.$router.push('/admin/questions'))
+    },
+    getAnswer() {
+      this.$axios
+        .get(
+          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${this.$route.params.edit}"&endAt="${this.$route.params.edit}"`
+        )
+        .then((res) => {
+          this.correct = Object.values(res)[0].answer
+          this.answer_id = Object.keys(res)[0]
+        })
     }
   }
 }
