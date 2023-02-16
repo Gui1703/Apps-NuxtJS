@@ -19,39 +19,35 @@ export default {
   },
   methods: {
     fetchQuestions() {
-      this.$axios
-        .get(
-          'https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions.json'
-        )
-        .then(
-          (res) =>
-            (this.questions = Object.keys(res.data).map((key, index) => {
-              res.data[key].id = key
-              return res.data[key]
-            }))
-        )
+      this.$axios.get('/questions.json').then(
+        (res) =>
+          (this.questions = Object.keys(res.data).map((key, index) => {
+            res.data[key].id = key
+            return res.data[key]
+          }))
+      )
     },
     destroy(id) {
+      this.$axios.delete(`/questions/${id}.json`).then((res) => {
+        this.fetchAnswer(id)
+      })
+    },
+    fetchAnswer(id) {
       this.$axios
-        .delete(
-          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions/${id}.json`
+        .get(
+          `/answers.json?orderBy="question_id"&startAt="${id}"&endAt="${id}"`
         )
         .then((res) => {
-          this.$axios
-            .get(
-              `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${id}"&endAt="${id}"`
-            )
-            .then((res) => {
-              const answerId = Object.keys(res.data).map((key, index) => {
-                return key
-              })
-              this.$axios
-                .delete(
-                  `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers/${answerId}.json`
-                )
-                .then((res) => this.questions.splice(this.questions[id]))
-            })
+          const answerId = Object.keys(res.data).map((key, index) => {
+            return key
+          })
+          this.destroyAnswer(id, answerId)
         })
+    },
+    destroyAnswer(id, answerId) {
+      this.$axios
+        .delete(`/answers/${answerId}.json`)
+        .then((res) => this.questions.splice(this.questions[id]))
     }
   }
 }

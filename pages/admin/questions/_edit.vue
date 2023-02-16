@@ -20,15 +20,13 @@ export default {
   methods: {
     get() {
       this.$axios
-        .get(
-          'https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions.json'
-        )
+        .get('/questions.json')
         .then((res) => (this.quiz = res.data[this.$route.params.edit]))
     },
     getAnswer() {
       this.$axios
         .get(
-          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${this.$route.params.edit}"&endAt="${this.$route.params.edit}"`
+          `/answers.json?orderBy="question_id"&startAt="${this.$route.params.edit}"&endAt="${this.$route.params.edit}"`
         )
         .then((res) => {
           this.correct = Object.values(res.data)[0].answer
@@ -37,17 +35,14 @@ export default {
     },
     update() {
       this.$axios
-        .patch(
-          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions/${this.$route.params.edit}.json`,
-          this.quiz
-        )
+        .patch(`/questions/${this.$route.params.edit}.json`, this.quiz)
         .then((res) => this.updateAnswer())
     },
 
     updateAnswer() {
       this.$axios
         .patch(
-          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers/${this.question_id}.json`,
+          `/answers/${this.question_id}.json`,
           { question_id: this.$route.params.edit, answer: this.correct },
 
           this.quiz

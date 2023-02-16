@@ -14,24 +14,16 @@ export default {
   },
   methods: {
     store() {
-      this.$axios
-        .post(
-          'https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions.json',
-          this.quiz
-        )
-        .then((res) => {
-          this.storeAnswer(res.data.name)
-        })
+      this.$axios.post('questions.json', this.quiz).then((res) => {
+        this.storeAnswer(res.data.name)
+      })
     },
     storeAnswer(id) {
       this.$axios
-        .post(
-          'https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json',
-          {
-            question_id: id,
-            answer: this.correct
-          }
-        )
+        .post('/answers.json', {
+          question_id: id,
+          answer: this.correct
+        })
         .then((result) => {
           this.$router.push('/admin/questions')
         })
