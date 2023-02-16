@@ -30,6 +30,28 @@ export default {
               return res.data[key]
             }))
         )
+    },
+    destroy(id) {
+      this.$axios
+        .delete(
+          `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/questions/${id}.json`
+        )
+        .then((res) => {
+          this.$axios
+            .get(
+              `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers.json?orderBy="question_id"&startAt="${id}"&endAt="${id}"`
+            )
+            .then((res) => {
+              const answerId = Object.keys(res.data).map((key, index) => {
+                return key
+              })
+              this.$axios
+                .delete(
+                  `https://nuxt-quiz-952c6-default-rtdb.firebaseio.com/quiz/answers/${answerId}.json`
+                )
+                .then((res) => this.questions.splice(this.questions[id]))
+            })
+        })
     }
   }
 }
@@ -65,7 +87,9 @@ export default {
                     <nuxt-link class="link" :to="`/admin/questions/${item.id}`">
                       <v-icon color="orange">mdi mdi-pencil</v-icon>
                     </nuxt-link>
-                    <v-icon color="red">mdi mdi-delete</v-icon>
+                    <v-icon color="red" @click="destroy(item.id)"
+                      >mdi mdi-delete
+                    </v-icon>
                   </td>
                 </tr>
               </template>
