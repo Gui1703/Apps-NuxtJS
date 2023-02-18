@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+
 require('dotenv').config()
 
 export default {
@@ -40,7 +41,8 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'cookie-universal-nuxt'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
