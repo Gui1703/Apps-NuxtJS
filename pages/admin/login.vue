@@ -14,7 +14,12 @@ export default {
     login() {
       this.$axios
         .$post(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${process.env.FIREBASE_KEY}`
+          `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${process.env.FIREBASE_KEY}`,
+          {
+            email: this.email,
+            password: this.password,
+            returnSecureToken: true
+          }
         )
         .then((res) => this.handleToken(res.idToken))
     },
