@@ -25,6 +25,7 @@ export default {
     },
     handleToken(token) {
       this.$cookies.set('token', token)
+      this.$store.commit('auth/setLoggedIn', true)
       this.$router.push('/admin/questions')
     }
   }
