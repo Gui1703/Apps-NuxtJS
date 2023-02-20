@@ -28,6 +28,7 @@ export default {
   methods: {
     logout() {
       this.$cookies.remove('token')
+      this.$store.commit('auth/setLoggedIn', false)
       this.$router.push('/admin/login')
     }
   }
@@ -67,7 +68,9 @@ export default {
       <v-btn plain>
         <nuxt-link class="link" to="/quiz">Quiz App</nuxt-link>
       </v-btn>
-      <v-btn v-if="$cookies.get('token')" plain @click="logout">Logout</v-btn>
+      <v-btn v-if="$store.state.auth.loggedIn" plain @click="logout">
+        Logout
+      </v-btn>
     </v-app-bar>
 
     <v-main>
