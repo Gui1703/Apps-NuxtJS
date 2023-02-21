@@ -30,6 +30,12 @@ export default {
     },
     verifyAnswer(answer) {
       this.result = answer === this.choosen
+    },
+    answerColor() {
+      if (this.result === null) {
+        return 'white'
+      }
+      return this.result ? 'green' : 'red'
     }
   }
 }
@@ -44,13 +50,29 @@ export default {
     <v-card-text>
       <v-container>
         <v-radio-group v-model="choosen" row>
-          <v-radio :label="item.option1" :value="item.option1" color="green" />
+          <v-radio
+            :label="item.option1"
+            :value="item.option1"
+            :color="answerColor()"
+          />
           <v-spacer />
-          <v-radio :label="item.option2" :value="item.option2" color="green" />
+          <v-radio
+            :label="item.option2"
+            :value="item.option2"
+            :color="answerColor()"
+          />
           <v-spacer />
-          <v-radio :label="item.option3" :value="item.option3" color="green" />
+          <v-radio
+            :label="item.option3"
+            :value="item.option3"
+            :color="answerColor()"
+          />
           <v-spacer />
-          <v-radio :label="item.option4" :value="item.option4" color="green" />
+          <v-radio
+            :label="item.option4"
+            :value="item.option4"
+            :color="answerColor()"
+          />
         </v-radio-group>
       </v-container>
 
