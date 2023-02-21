@@ -5,6 +5,10 @@ export default {
     item: {
       type: Object,
       default: () => {}
+    },
+    id: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -15,7 +19,17 @@ export default {
   },
   methods: {
     handleAnswer() {
-      console.log(this.choosen)
+      this.$axios
+        .$get(
+          `/answers.json?orderBy="question_id"&startAt="${this.id}"&endAt="${this.id}"`
+        )
+        .then((res) => {
+          const answer = Object.values(res)[0].answer
+          this.verifyAnswer(answer)
+        })
+    },
+    verifyAnswer(answer) {
+      this.result = answer === this.choosen
     }
   }
 }

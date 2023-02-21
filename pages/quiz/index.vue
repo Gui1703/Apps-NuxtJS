@@ -29,6 +29,7 @@ export default {
 
       <Questions
         v-for="(question, index) in questions"
+        :id="index"
         :key="index"
         :item="question"
       />
