@@ -37,6 +37,10 @@ export default {
 
 <template>
   <v-app dark>
+    <no-ssr>
+      <notifications group="notify" />
+    </no-ssr>
+
     <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
       <v-list>
         <v-list-item

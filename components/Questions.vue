@@ -30,6 +30,13 @@ export default {
     },
     verifyAnswer(answer) {
       this.result = answer === this.choosen
+      if (this.result) {
+        this.$notify({
+          group: 'notify',
+          title: 'success',
+          text: 'Yeahh Correct Answer'
+        })
+      }
     },
     answerColor() {
       if (this.result === null) {
