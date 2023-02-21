@@ -1,14 +1,20 @@
 <script>
 export default {
-
+  name: 'Quiz',
   data() {
     return {
-      choosen: ''
+      choosen: '',
+      questions: []
     }
   },
+  created() {
+    this.getQuestions()
+  },
   methods: {
-    handleAnswer() {
-      console.log(this.choosen)
+    getQuestions() {
+      this.$axios
+        .get('/questions.json')
+        .then((res) => (this.questions = res.data))
     }
   }
 }
@@ -19,26 +25,44 @@ export default {
     <v-flex class="xs6">
       <h1 class="display-1">Quiz App</h1>
 
-      <v-card class="mt-4">
+      <v-card v-for="(question, index) in questions" :key="index" class="mt-4">
         <v-card-title class="deep-purple lighten-1 white--text">
-          <h1 class="headline">Question comes here</h1>
+          <h1 class="headline">{{ question.question }}</h1>
         </v-card-title>
 
         <v-card-text>
           <v-container>
             <v-radio-group v-model="choosen" row>
-              <v-radio label="Radio 1" color="green" value="option1"/>
-              <v-spacer/>
-              <v-radio label="Radio 2" color="green" value="option2"/>
-              <v-spacer/>
-              <v-radio label="Radio 3" color="green" value="option3"/>
-              <v-spacer/>
-              <v-radio label="Radio 4" color="green" value="option4"/>
+              <v-radio
+                :label="question.option1"
+                :value="question.option1"
+                color="green"
+              />
+              <v-spacer />
+              <v-radio
+                :label="question.option2"
+                :value="question.option2"
+                color="green"
+              />
+              <v-spacer />
+              <v-radio
+                :label="question.option3"
+                :value="question.option3"
+                color="green"
+              />
+              <v-spacer />
+              <v-radio
+                :label="question.option4"
+                :value="question.option4"
+                color="green"
+              />
             </v-radio-group>
           </v-container>
 
           <v-layout>
-            <v-btn color="purple darken-2" dark small @click="handleAnswer">Submit</v-btn>
+            <v-btn color="purple darken-2" dark small @click="handleAnswer"
+              >Submit
+            </v-btn>
           </v-layout>
         </v-card-text>
       </v-card>
