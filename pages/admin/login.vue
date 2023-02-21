@@ -1,6 +1,10 @@
 <script>
 export default {
   name: 'Login',
+  // middleware({ store, redirect }) {
+  //   console.log(store.state.auth.loggedIn)
+  // },
+  middleware: 'guest',
   data() {
     return {
       show1: false,

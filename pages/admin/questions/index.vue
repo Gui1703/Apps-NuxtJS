@@ -1,6 +1,7 @@
 <script>
 export default {
   name: 'QuestionsTable',
+  middleware: 'auth',
   data() {
     return {
       headers: [
