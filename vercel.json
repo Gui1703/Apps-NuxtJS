@@ -6,5 +6,13 @@
       "use": "@nuxtjs/vercel-builder",
       "config": {}
     }
-  ]
+  ],
+  "env": {
+    "MY_VARIABLE": true
+  },
+  "build": {
+    "env": {
+      "MY_VARIABLE": true
+    }
+  }
 }
